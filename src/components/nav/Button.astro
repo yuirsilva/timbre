@@ -3,12 +3,12 @@ import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"button"> {}
 
-const { class: className } = Astro.props;
+const { class: className, ...props } = Astro.props as Props;
+
+export const classes =
+    "inline-flex h-8 items-center justify-center whitespace-nowrap rounded-full px-3 py-1 text-base text-brand-white ring-offset-brand-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-brand-white";
 ---
 
-<button
-    class={`ring-offset-brand-white focus-visible:ring-brand-primary inline-flex items-center justify-center whitespace-nowrap rounded-full text-base text-brand-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50${className ? " " + className : ""}`}
-    {...Astro.props}
->
+<button class={`${classes}${className ? " " + className : ""}`} {...props}>
     <slot />
 </button>

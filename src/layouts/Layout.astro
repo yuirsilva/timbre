@@ -8,14 +8,16 @@ interface Props {
     ogImage?: string;
 }
 
-const { ogImage = "/default-opengraph.png" } = Astro.props;
+const { ogImage = "/default-opengraph.png", ...props } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-    <Head {...Astro.props} ogImage={ogImage} />
-    <body class="flex size-full flex-col font-sans">
-        <slot />
+    <Head {...props} ogImage={ogImage} />
+    <body class="flex size-full flex-col font-sans text-base">
+        <main class="h-[calc(var(--vh,_1vh)_*_100)]">
+            <slot />
+        </main>
         <Header />
 
         <style is:global>
@@ -34,14 +36,14 @@ const { ogImage = "/default-opengraph.png" } = Astro.props;
             @layer base {
                 :root {
                     /* DEFAULT theme */
-                    --white: #fef9ec;
-                    --black: theme("colors.black");
-                    --real-white: theme("colors.white");
+                    --white: 43 90% 96%;
+                    --black: 0 0% 0%;
+                    --real-white: 0 0% 100%;
 
-                    --primary: #307351;
-                    --primary-dark: #122b1e;
-                    --muted: #bfd6cb;
-                    --neutral-muted: #4d4b47;
+                    --primary: 150 41% 32%;
+                    --primary-dark: 149 41% 12%;
+                    --muted: 151 22% 79%;
+                    --neutral-muted: 40 4% 29%;
                 }
 
                 @font-face {

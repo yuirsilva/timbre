@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 
-import Button from "@components/nav/Button.astro";
+import Link from "@components/nav/Link.astro";
 import RealViewport from "@components/RealViewport.astro";
 ---
 
@@ -9,26 +9,22 @@ import RealViewport from "@components/RealViewport.astro";
     title="Timbre — A collection of sounds for your website."
     description="Collection of sounds made specifically for web experiences."
 >
-    <main class="h-[calc(var(--vh,_1vh)_*_100)]">
-        <section
-            class="flex size-full flex-col items-center justify-center px-5"
-        >
-            <div class="text-center">
-                <h1
-                    class="max-w-[calc(var(--vh,_1vh)_*_90)] font-title text-[calc(var(--vh,_1vh)_*_10)] leading-[90%] md:text-[calc(var(--vh,_1vh)_*_14)]"
-                >
-                    A collection of sounds for your website.
-                </h1>
-                <p class="mt-4 text-brand-primary-dark">
-                    A collection of sounds made specifically for web
-                    experiences.
-                </p>
-            </div>
-            <Button
-                class="mt-8 h-10 bg-brand-primary px-3 py-1 text-brand-white"
-                >Check our catalog -&gt;</Button
+    <section class="flex size-full flex-col items-center justify-center px-5">
+        <div class="text-center">
+            <h1
+                class="max-w-[calc(var(--vh,_1vh)_*_90)] font-title text-[calc(var(--vh,_1vh)_*_10)] leading-[90%] md:text-[calc(var(--vh,_1vh)_*_14)]"
             >
-        </section>
-    </main>
+                A collection of sounds for your website.
+            </h1>
+            <p class="mt-4 text-brand-primary-dark">
+                A collection of sounds made specifically for web experiences.
+            </p>
+        </div>
+        <Link
+            href="/sounds"
+            class="hover:bg-brand-primary/80 mt-8 bg-brand-primary"
+            >Check our catalog -&gt;</Link
+        >
+    </section>
     <RealViewport />
 </Layout>

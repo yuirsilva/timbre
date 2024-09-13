@@ -11,16 +11,19 @@ const config = {
             },
             colors: {
                 brand: {
-                    white: "var(--white)",
-                    black: "var(--black)",
-                    "real-white": "var(--real-white)",
+                    white: "hsl(var(--white))",
+                    black: "hsl(var(--black))",
+                    "real-white": "hsl(var(--real-white))",
 
-                    primary: "var(--primary)",
-                    "primary-dark": "var(--primary-dark)",
-                    muted: "var(--muted)",
-                    "neutral-muted": "var(--neutral-muted)",
+                    primary: "hsl(var(--primary))",
+                    "primary-dark": "hsl(var(--primary-dark))",
+                    muted: "hsl(var(--muted))",
+                    "neutral-muted": "hsl(var(--neutral-muted))",
                 },
             },
+        },
+        fontSize: {
+            base: ["16px", "20px"],
         },
     },
     plugins: [],

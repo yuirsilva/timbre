@@ -1,0 +1,12 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { classes } from "@components/nav/Button.astro";
+
+interface Props extends HTMLAttributes<"a"> {}
+
+const { class: className, ...props } = Astro.props as Props;
+---
+
+<a class={`${classes}${className ? " " + className : ""}`} {...props}>
+    <slot />
+</a>
