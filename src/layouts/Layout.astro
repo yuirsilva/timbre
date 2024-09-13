@@ -1,5 +1,6 @@
 ---
 import Head from "@components/Head.astro";
+import Header from "@components/nav/Header.astro";
 
 interface Props {
     title: string;
@@ -13,36 +14,63 @@ const { ogImage = "/default-opengraph.png" } = Astro.props;
 <!doctype html>
 <html lang="en">
     <Head {...Astro.props} ogImage={ogImage} />
-    <body>
+    <body class="flex size-full flex-col font-sans">
         <slot />
+        <Header />
+
+        <style is:global>
+            @tailwind base;
+            @tailwind components;
+            @tailwind utilities;
+
+            ::-webkit-scrollbar {
+                display: none;
+            }
+            body {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+
+            @layer base {
+                :root {
+                    /* DEFAULT theme */
+                    --white: #fef9ec;
+                    --black: theme("colors.black");
+                    --real-white: theme("colors.white");
+
+                    --primary: #307351;
+                    --primary-dark: #122b1e;
+                    --muted: #bfd6cb;
+                    --neutral-muted: #4d4b47;
+                }
+
+                @font-face {
+                    font-family: "Reed";
+                    src: url(/fonts/Reed-Regular.woff2) format("woff2");
+                    font-weight: 400;
+                    font-style: normal;
+                    font-display: swap;
+                }
+
+                @font-face {
+                    font-family: "Pretendard";
+                    src: url(/fonts/Pretendard-Regular.woff2) format("woff2");
+                    font-weight: 400;
+                    font-style: normal;
+                    font-display: swap;
+                }
+
+                body {
+                    @apply bg-brand-white text-brand-black;
+                    font-feature-settings:
+                        "rlig" 1,
+                        "calt" 1;
+                    text-rendering: optimizeLegibility;
+                    -webkit-text-size-adjust: 100%;
+                    -moz-text-size-adjust: 100%;
+                    text-size-adjust: 100%;
+                }
+            }
+        </style>
     </body>
 </html>
-
-<style is:global>
-    :root {
-        --accent: 136, 58, 234;
-        --accent-light: 224, 204, 250;
-        --accent-dark: 49, 10, 101;
-        --accent-gradient: linear-gradient(
-            45deg,
-            rgb(var(--accent)),
-            rgb(var(--accent-light)) 30%,
-            white 60%
-        );
-    }
-    html {
-        font-family: system-ui, sans-serif;
-        background: #13151a;
-    }
-    code {
-        font-family:
-            Menlo,
-            Monaco,
-            Lucida Console,
-            Liberation Mono,
-            DejaVu Sans Mono,
-            Bitstream Vera Sans Mono,
-            Courier New,
-            monospace;
-    }
-</style>

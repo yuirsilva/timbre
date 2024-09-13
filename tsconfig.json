@@ -1,15 +1,13 @@
 {
-  "extends": "astro/tsconfigs/strictest",
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "allowJs": true,
-    "baseUrl": ".",
-    "strict": true,
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@/*": ["src/*"]
-    }
-  },
-  "exclude": ["node_modules"]
+    "extends": "astro/tsconfigs/strictest",
+    "compilerOptions": {
+        "allowJs": true,
+        "baseUrl": ".",
+        "strict": true,
+        "paths": {
+            "@components/*": ["src/components/*"],
+            "@/*": ["src/*"]
+        }
+    },
+    "exclude": ["node_modules"]
 }
