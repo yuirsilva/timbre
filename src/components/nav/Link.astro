@@ -2,11 +2,26 @@
 import type { HTMLAttributes } from "astro/types";
 import { classes } from "@components/nav/Button.astro";
 
-interface Props extends HTMLAttributes<"a"> {}
+interface Props extends HTMLAttributes<"a"> {
+    variant?: "default" | "muted" | "ghost";
+}
 
-const { class: className, ...props } = Astro.props as Props;
+const {
+    class: className,
+    variant = "default",
+    ...props
+} = Astro.props as Props;
+
+const linkVariants = {
+    default: `${classes} text-brand-white bg-brand-primary hover:bg-brand-primary/80`,
+    ghost: `${classes}`,
+    muted: `${classes} text-brand-white bg-brand-neutral-muted hover:bg-brand-neutral-muted/80`,
+};
 ---
 
-<a class={`${classes}${className ? " " + className : ""}`} {...props}>
+<a
+    class={`${linkVariants[variant]}${className ? " " + className : ""}`}
+    {...props}
+>
     <slot />
 </a>

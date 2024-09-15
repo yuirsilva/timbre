@@ -8,6 +8,7 @@ const config = {
             fontFamily: {
                 sans: ["Pretendard", ...defaultTheme.fontFamily.sans],
                 title: ["Reed"],
+                mono: ["PPSupplyMono", ...defaultTheme.fontFamily.mono],
             },
             colors: {
                 brand: {

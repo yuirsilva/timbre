@@ -3,15 +3,45 @@ import Logo from "@components/Logo.astro";
 import Link from "@components/nav/Link.astro";
 ---
 
-<header class="fixed left-0 top-0 flex w-full justify-between px-5 pt-5">
-    <a href="/" aria-label="Go to homepage">
+<header class="fixed left-0 top-0 w-full px-5 pt-5">
+    <nav class="flex w-full justify-between">
+        <a href="/" aria-label="Go to homepage">
+            <div>
+                <Logo />
+            </div>
+        </a>
         <div>
-            <Logo />
+            <Link
+                href="/about"
+                variant="ghost"
+                class="group [&_span]:transition-transform [&_span]:duration-1000 [&_span]:ease-[var(--aa)]"
+            >
+                <div class="pointer-events-none relative overflow-hidden">
+                    <p
+                        class="flex group-hover:[&_span]:[transform:translate3d(0,-110%,0)]"
+                    >
+                        <span class="delay-[30ms]">[</span>
+                        <span class="delay-[45ms]">a</span>
+                        <span class="delay-[60ms]">b</span>
+                        <span class="delay-[75ms]">o</span>
+                        <span class="delay-[90ms]">u</span>
+                        <span class="delay-[105ms]">t</span>
+                        <span class="delay-[120ms]">]</span>
+                    </p>
+                    <div
+                        class="absolute left-0 top-0 flex [&_span]:[transform:translate3d(0,110%,0)] group-hover:[&_span]:[transform:translate3d(0,0%,0)]"
+                    >
+                        <span class="delay-[30ms]">(</span>
+                        <span class="delay-[45ms]">a</span>
+                        <span class="delay-[60ms]">b</span>
+                        <span class="delay-[75ms]">o</span>
+                        <span class="delay-[90ms]">u</span>
+                        <span class="delay-[105ms]">t</span>
+                        <span class="delay-[120ms]">)</span>
+                    </div>
+                </div>
+            </Link>
+            <Link variant="muted" href="/sounds">Check our catalog -&gt;</Link>
         </div>
-    </a>
-    <Link
-        href="/sounds"
-        class="hover:bg-brand-neutral-muted/80 bg-brand-neutral-muted"
-        >Check our catalog -&gt;</Link
-    >
+    </nav>
 </header>

@@ -44,6 +44,8 @@ const { ogImage = "/default-opengraph.png", ...props } = Astro.props;
                     --primary-dark: 149 41% 12%;
                     --muted: 151 22% 79%;
                     --neutral-muted: 40 4% 29%;
+
+                    --aa: cubic-bezier(0.19, 1, 0.22, 1);
                 }
 
                 @font-face {
@@ -57,6 +59,14 @@ const { ogImage = "/default-opengraph.png", ...props } = Astro.props;
                 @font-face {
                     font-family: "Pretendard";
                     src: url(/fonts/Pretendard-Regular.woff2) format("woff2");
+                    font-weight: 400;
+                    font-style: normal;
+                    font-display: swap;
+                }
+
+                @font-face {
+                    font-family: "PPSupplyMono";
+                    src: url(/fonts/PPSupplyMono-Regular.woff2) format("woff2");
                     font-weight: 400;
                     font-style: normal;
                     font-display: swap;
