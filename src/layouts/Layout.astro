@@ -1,4 +1,6 @@
 ---
+import "@/styles/global.css";
+
 import Head from "@components/Head.astro";
 import Header from "@components/nav/Header.astro";
 
@@ -19,70 +21,5 @@ const { ogImage = "/default-opengraph.png", ...props } = Astro.props;
             <slot />
         </main>
         <Header />
-
-        <style is:global>
-            @tailwind base;
-            @tailwind components;
-            @tailwind utilities;
-
-            ::-webkit-scrollbar {
-                display: none;
-            }
-            body {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-            }
-
-            @layer base {
-                :root {
-                    /* DEFAULT theme */
-                    --white: 43 90% 96%;
-                    --black: 0 0% 0%;
-                    --real-white: 0 0% 100%;
-
-                    --primary: 150 41% 32%;
-                    --primary-dark: 149 41% 12%;
-                    --muted: 151 22% 79%;
-                    --neutral-muted: 40 4% 29%;
-
-                    --aa: cubic-bezier(0.19, 1, 0.22, 1);
-                }
-
-                @font-face {
-                    font-family: "Reed";
-                    src: url(/fonts/Reed-Regular.woff2) format("woff2");
-                    font-weight: 400;
-                    font-style: normal;
-                    font-display: swap;
-                }
-
-                @font-face {
-                    font-family: "Pretendard";
-                    src: url(/fonts/Pretendard-Regular.woff2) format("woff2");
-                    font-weight: 400;
-                    font-style: normal;
-                    font-display: swap;
-                }
-
-                @font-face {
-                    font-family: "PPSupplyMono";
-                    src: url(/fonts/PPSupplyMono-Regular.woff2) format("woff2");
-                    font-weight: 400;
-                    font-style: normal;
-                    font-display: swap;
-                }
-
-                body {
-                    @apply bg-brand-white text-brand-black;
-                    font-feature-settings:
-                        "rlig" 1,
-                        "calt" 1;
-                    text-rendering: optimizeLegibility;
-                    -webkit-text-size-adjust: 100%;
-                    -moz-text-size-adjust: 100%;
-                    text-size-adjust: 100%;
-                }
-            }
-        </style>
     </body>
 </html>
