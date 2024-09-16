@@ -22,9 +22,9 @@ const config = {
                     "neutral-muted": "hsl(var(--neutral-muted))",
                 },
             },
-        },
-        fontSize: {
-            base: ["16px", "20px"],
+            fontSize: {
+                base: ["16px", "20px"],
+            },
         },
     },
     plugins: [],

@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import RealViewport from "@components/RealViewport.astro";
+import Footer from "@components/nav/Footer.astro";
 ---
 
 <Layout
@@ -8,7 +9,13 @@ import RealViewport from "@components/RealViewport.astro";
     description="Collection of sounds made specifically for web experiences."
 >
     <section class="flex size-full flex-col items-center justify-center px-5">
-        <p>I no longer fear the razor guarding my heel</p>
+        <h1 class="text-9xl">Timbre</h1>
+        <p class="max-w-xl text-center uppercase">
+            A collection of free to use sounds dedicated to any type of web
+            experience, providing a range of different sounds. you'll find cool
+            shit regardless of your goal.
+        </p>
+        <Footer />
     </section>
     <RealViewport />
 </Layout>
