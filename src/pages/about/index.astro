@@ -1,21 +1,41 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import RealViewport from "@components/RealViewport.astro";
-import Footer from "@components/nav/Footer.astro";
+// import Footer from "@components/nav/Footer.astro";
 ---
 
 <Layout
     title="Timbre — A collection of sounds for your website."
     description="Collection of sounds made specifically for web experiences."
 >
-    <section class="flex size-full flex-col items-center justify-center px-5">
-        <h1 class="text-9xl">Timbre</h1>
+    <section
+        class="flex size-full flex-col items-center justify-center gap-8 px-5"
+    >
+        <h1
+            aria-label="Timbre"
+            class="w-full text-center text-[clamp(2rem,_20vw,_8rem)] font-medium uppercase tracking-tighter md:text-9xl"
+        >
+            <div class="pointer-events-none select-none [&_div]:leading-[20px]">
+                {
+                    [...Array(12)].map((_, i) => (
+                        <div class="h-5 w-full overflow-hidden">
+                            <span
+                                class="animate-about relative inline-block"
+                                style={`animation-delay: ${i * 100}ms; bottom: ${i * 20 - 120}px;`}
+                            >
+                                timbre
+                            </span>
+                        </div>
+                    ))
+                }
+            </div>
+        </h1>
         <p class="max-w-xl text-center uppercase">
             A collection of free to use sounds dedicated to any type of web
             experience, providing a range of different sounds. you'll find cool
             shit regardless of your goal.
         </p>
-        <Footer />
+        <!-- <Footer /> -->
     </section>
     <RealViewport />
 </Layout>

@@ -10,38 +10,44 @@ import Link from "@components/nav/Link.astro";
                 <Logo />
             </div>
         </a>
-        <div>
-            <Link
-                href="/about"
-                variant="ghost"
-                class="group [&_span]:transition-transform [&_span]:duration-1000 [&_span]:ease-[var(--aa)]"
-            >
-                <div class="pointer-events-none relative overflow-hidden">
-                    <p
-                        class="flex group-hover:[&_span]:[transform:translate3d(0,-110%,0)]"
+        <div class="flex">
+            {
+                Astro.url.pathname === "/about" ? null : (
+                    <Link
+                        href="/about"
+                        variant="ghost"
+                        class="group [&_span]:transition-transform [&_span]:duration-1000 [&_span]:ease-[var(--aa)]"
                     >
-                        <span class="delay-[30ms]">[</span>
-                        <span class="delay-[45ms]">a</span>
-                        <span class="delay-[60ms]">b</span>
-                        <span class="delay-[75ms]">o</span>
-                        <span class="delay-[90ms]">u</span>
-                        <span class="delay-[105ms]">t</span>
-                        <span class="delay-[120ms]">]</span>
-                    </p>
-                    <div
-                        class="absolute left-0 top-0 flex [&_span]:[transform:translate3d(0,110%,0)] group-hover:[&_span]:[transform:translate3d(0,0%,0)]"
-                    >
-                        <span class="delay-[30ms]">(</span>
-                        <span class="delay-[45ms]">a</span>
-                        <span class="delay-[60ms]">b</span>
-                        <span class="delay-[75ms]">o</span>
-                        <span class="delay-[90ms]">u</span>
-                        <span class="delay-[105ms]">t</span>
-                        <span class="delay-[120ms]">)</span>
-                    </div>
-                </div>
-            </Link>
-            <Link variant="muted" href="/sounds">Check our catalog -&gt;</Link>
+                        <div class="pointer-events-none relative overflow-hidden">
+                            <p class="flex group-hover:[&_span]:[transform:translate3d(0,-110%,0)]">
+                                <span class="delay-[30ms]">[</span>
+                                <span class="delay-[45ms]">a</span>
+                                <span class="delay-[60ms]">b</span>
+                                <span class="delay-[75ms]">o</span>
+                                <span class="delay-[90ms]">u</span>
+                                <span class="delay-[105ms]">t</span>
+                                <span class="delay-[120ms]">]</span>
+                            </p>
+                            <div class="absolute left-0 top-0 flex [&_span]:[transform:translate3d(0,110%,0)] group-hover:[&_span]:[transform:translate3d(0,0%,0)]">
+                                <span class="delay-[30ms]">(</span>
+                                <span class="delay-[45ms]">a</span>
+                                <span class="delay-[60ms]">b</span>
+                                <span class="delay-[75ms]">o</span>
+                                <span class="delay-[90ms]">u</span>
+                                <span class="delay-[105ms]">t</span>
+                                <span class="delay-[120ms]">)</span>
+                            </div>
+                        </div>
+                    </Link>
+                )
+            }
+            {
+                Astro.url.pathname === "/sounds" ? null : (
+                    <Link class="hidden sm:flex" variant="muted" href="/sounds">
+                        Check our catalog -&gt;
+                    </Link>
+                )
+            }
         </div>
     </nav>
 </header>

@@ -3,6 +3,7 @@ import "@/styles/global.css";
 
 import Head from "@components/Head.astro";
 import Header from "@components/nav/Header.astro";
+import RealViewport from "@components/RealViewport.astro";
 
 interface Props {
     title: string;
@@ -21,5 +22,6 @@ const { ogImage = "/default-opengraph.png", ...props } = Astro.props;
             <slot />
         </main>
         <Header />
+        <RealViewport />
     </body>
 </html>

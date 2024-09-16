@@ -25,6 +25,17 @@ const config = {
             fontSize: {
                 base: ["16px", "20px"],
             },
+            keyframes: {
+                about: {
+                    "0%": { transform: "translate3d(0, 0%, 0)" },
+                    "100%": {
+                        transform: "translate3d(0, -100%, 0) scale(1.2,1.5)",
+                    },
+                },
+            },
+            animation: {
+                about: "about 1s infinite",
+            },
         },
     },
     plugins: [],
