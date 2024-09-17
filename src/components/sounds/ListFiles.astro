@@ -12,11 +12,13 @@ interface CloudinaryResource {
     is_audio: boolean;
     public_id: string;
     secure_url: string;
+    bytes: number;
 }
 
-const { resources } = (await cloudinary.api.resources({
+let { resources } = (await cloudinary.api.resources({
     resource_type: "video",
 })) as { resources: CloudinaryResource[] };
+resources = resources.filter((item) => item.bytes !== 0);
 ---
 
 <table class="w-full">
@@ -27,14 +29,14 @@ const { resources } = (await cloudinary.api.resources({
             <th></th>
             <th>Filename</th>
             <th>Duration</th>
-            <th>Extensions</th>
+            <th></th>
         </tr>
     </thead>
     <tbody class="font-mono font-normal uppercase">
         {
             resources.map((file) => (
                 <tr class="group relative border-b border-brand-white-dark hover:bg-brand-white-dark/20">
-                    <td class="py-2">
+                    <td class="py-2 pl-2">
                         <Button
                             variant="ghost"
                             class="file-button font-mono uppercase"
@@ -57,7 +59,7 @@ const { resources } = (await cloudinary.api.resources({
                             0:00
                         </p>
                     </td>
-                    <td class="flex gap-2 py-2 [&_button]:font-sans">
+                    <td class="flex justify-end gap-2 py-2 pr-2 [&_button]:font-sans">
                         <Button>webm</Button>
                         <Button>mp3</Button>
                     </td>
