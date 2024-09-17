@@ -22,7 +22,7 @@ let { resources } = (await cloudinary.api.resources({
 resources = resources.filter((item) => item.bytes !== 0);
 ---
 
-<table class="w-full">
+<table class="w-full max-[440px]:w-96">
     <thead>
         <tr
             class="border-b border-brand-white-dark text-left font-mono uppercase text-brand-black [&_th]:font-normal"
