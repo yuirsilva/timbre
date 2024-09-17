@@ -10,6 +10,7 @@ cloudinary.config({
 
 interface CloudinaryResource {
     is_audio: boolean;
+    display_name: string;
     public_id: string;
     secure_url: string;
     bytes: number;
@@ -48,7 +49,7 @@ resources = resources.filter((item) => item.bytes !== 0);
                     </td>
                     <td class="py-2">
                         <p class="w-fit bg-brand-black text-brand-real-white">
-                            {file.public_id}
+                            {file.display_name}
                         </p>
                     </td>
                     <td class="py-2">
@@ -60,8 +61,13 @@ resources = resources.filter((item) => item.bytes !== 0);
                         </p>
                     </td>
                     <td class="flex justify-end gap-2 py-2 pr-2 [&_button]:font-sans">
-                        <Button>webm</Button>
-                        <Button>mp3</Button>
+                        <Button
+                            class="download-webm"
+                            data-url={file.secure_url}
+                            data-filename={file.display_name}
+                        >
+                            webm
+                        </Button>
                     </td>
                 </tr>
             ))
@@ -71,14 +77,27 @@ resources = resources.filter((item) => item.bytes !== 0);
 
 <script>
     import { Howl } from "howler";
-    import { formatDuration } from "@/lib/functions";
+    import { formatDuration, downloadResource } from "@/lib/functions";
 
     document.addEventListener("DOMContentLoaded", () => {
-        const playButtons =
+        const playButton =
             document.querySelectorAll<HTMLButtonElement>(".file-button");
         const sounds: { [key: string]: Howl } = {};
 
-        playButtons.forEach((button) => {
+        const webmButton =
+            document.querySelectorAll<HTMLButtonElement>(".download-webm");
+
+        webmButton.forEach((button) => {
+            const url = button.dataset.url;
+            const filename = button.dataset.filename;
+            if (!url || !filename) return;
+
+            button.addEventListener("click", () => {
+                downloadResource(url, `${filename}.webm`);
+            });
+        });
+
+        playButton.forEach((button) => {
             const url = button.dataset.url;
             const filename = button.dataset.filename;
             if (!url || !filename) return;
