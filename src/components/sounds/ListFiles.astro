@@ -1,0 +1,121 @@
+---
+import Button from "@components/nav/Button.astro";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+    cloud_name: import.meta.env.ASTRO_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    api_key: import.meta.env.ASTRO_PUBLIC_CLOUDINARY_API_KEY,
+    api_secret: import.meta.env.CLOUDINARY_API_SECRET,
+});
+
+interface CloudinaryResource {
+    is_audio: boolean;
+    public_id: string;
+    secure_url: string;
+}
+
+const { resources } = (await cloudinary.api.resources({
+    resource_type: "video",
+})) as { resources: CloudinaryResource[] };
+---
+
+<table class="w-full">
+    <thead>
+        <tr
+            class="border-b border-brand-white-dark text-left font-mono uppercase text-brand-black [&_th]:font-normal"
+        >
+            <th></th>
+            <th>Filename</th>
+            <th>Duration</th>
+            <th>Extensions</th>
+        </tr>
+    </thead>
+    <tbody class="font-mono font-normal uppercase">
+        {
+            resources.map((file) => (
+                <tr class="group relative border-b border-brand-white-dark hover:bg-brand-white-dark/20">
+                    <td class="py-2">
+                        <Button
+                            variant="ghost"
+                            class="file-button font-mono uppercase"
+                            data-url={file.secure_url}
+                            data-filename={file.public_id}
+                        >
+                            [Play]
+                        </Button>
+                    </td>
+                    <td class="py-2">
+                        <p class="w-fit bg-brand-black text-brand-real-white">
+                            {file.public_id}
+                        </p>
+                    </td>
+                    <td class="py-2">
+                        <p
+                            id={`duration-${file.public_id}`}
+                            class="w-fit bg-brand-black text-brand-real-white"
+                        >
+                            0:00
+                        </p>
+                    </td>
+                    <td class="flex gap-2 py-2 [&_button]:font-sans">
+                        <Button>webm</Button>
+                        <Button>mp3</Button>
+                    </td>
+                </tr>
+            ))
+        }
+    </tbody>
+</table>
+
+<script>
+    import { Howl } from "howler";
+    import { formatDuration } from "@/lib/functions";
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const playButtons =
+            document.querySelectorAll<HTMLButtonElement>(".file-button");
+        const sounds: { [key: string]: Howl } = {};
+
+        playButtons.forEach((button) => {
+            const url = button.dataset.url;
+            const filename = button.dataset.filename;
+            if (!url || !filename) return;
+
+            sounds[filename] = new Howl({
+                src: [url],
+                html5: true,
+                onload: () => {
+                    const durationElement = document.getElementById(
+                        `duration-${filename}`
+                    );
+                    if (durationElement && sounds[filename]) {
+                        durationElement.innerText = formatDuration(
+                            sounds[filename].duration()
+                        );
+                    }
+                },
+                onplay: () => {
+                    button.innerText = "[Stop]";
+                },
+                onstop: () => {
+                    button.innerText = "[Play]";
+                },
+                onend: () => {
+                    button.innerText = "[Play]";
+                },
+            });
+
+            button.addEventListener("click", () => {
+                Object.values(sounds).forEach((sound) => {
+                    if (sound !== sounds[filename] && sound.playing()) {
+                        sound.stop();
+                    }
+                });
+
+                sounds[filename]?.playing()
+                    ? sounds[filename].stop()
+                    : sounds[filename]?.play();
+            });
+        });
+    });
+</script>

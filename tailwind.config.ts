@@ -13,6 +13,8 @@ const config = {
             colors: {
                 brand: {
                     white: "hsl(var(--white))",
+                    "white-dark": "hsl(var(--white-dark))",
+
                     black: "hsl(var(--black))",
                     "real-white": "hsl(var(--real-white))",
 

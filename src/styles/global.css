@@ -14,6 +14,8 @@ body {
     :root {
         /* DEFAULT theme */
         --white: 43 90% 96%;
+        --white-dark: 44 30% 76%;
+
         --black: 0 0% 0%;
         --real-white: 0 0% 100%;
 

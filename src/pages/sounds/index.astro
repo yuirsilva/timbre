@@ -1,14 +1,32 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import RealViewport from "@components/RealViewport.astro";
+import ListFiles from "@components/sounds/ListFiles.astro";
 ---
 
 <Layout
     title="Timbre — Sounds"
     description="Collection of sounds made specifically for web experiences."
 >
-    <section class="flex size-full flex-col items-center justify-center px-5">
-        <p>I no longer fear the razor guarding my heel</p>
+    <section
+        class="mx-auto mt-32 flex size-full max-w-3xl flex-col items-center gap-8 px-5"
+    >
+        <div class="max-w-60 text-center">
+            <h1
+                class="font-title text-[clamp(2rem,_calc(var(--vh,_1vh)_*_40),_4rem)] leading-none"
+            >
+                make it pop!
+            </h1>
+            <p class="mt-4">
+                A collection of sounds made specifically for web experiences.
+            </p>
+        </div>
+
+        <!-- sounds -->
+        <div class="w-full">
+            <ListFiles />
+        </div>
+        <!--  -->
     </section>
     <RealViewport />
 </Layout>

@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"button"> {
-    variant?: "default" | "muted";
+    variant?: "default" | "ghost" | "muted";
 }
 
 const { class: className, variant = "default", ...props } = Astro.props;
@@ -11,8 +11,9 @@ export const classes =
     "inline-flex h-8 items-center justify-center whitespace-nowrap rounded-full px-3 py-1 text-base ring-offset-brand-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
 
 const buttonVariants = {
-    default: `${classes} text-brand-white`,
-    muted: `${classes} bg-brand-neutral-muted`,
+    default: `${classes} text-brand-white bg-brand-primary hover:bg-brand-primary/80`,
+    ghost: `${classes} hover:bg-brand-primary-dark/20`,
+    muted: `${classes} bg-brand-neutral-muted hover:bg-brand-neutral-muted/80`,
 };
 ---
 
