@@ -3,7 +3,15 @@ import Button from "@components/nav/Button.astro";
 import { formatFile } from "@/lib/functions";
 import { utapi } from "@/server/uploadthing";
 
+// ONE DAY I'LL FIX THIS MESS
+type DeepWriteable<T> = { -readonly [P in keyof T]: DeepWriteable<T[P]> };
+
 let files = await utapi.listFiles();
+
+type Writeable = DeepWriteable<typeof files>;
+
+let mutFiles = files as Writeable;
+mutFiles.files.sort((a, b) => a.name.localeCompare(b.name));
 ---
 
 <table class="w-full max-[440px]:w-96">
@@ -19,7 +27,7 @@ let files = await utapi.listFiles();
     </thead>
     <tbody class="font-mono font-normal uppercase">
         {
-            files.files.map((file) => (
+            mutFiles.files.map((file) => (
                 <tr class="group relative border-b border-brand-white-dark hover:bg-brand-white-dark/20">
                     <td class="py-2 pl-2">
                         <Button
