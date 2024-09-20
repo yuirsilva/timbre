@@ -2,6 +2,7 @@
 import "@/styles/global.css";
 
 import Head from "@components/Head.astro";
+import Footer from "@components/nav/Footer.astro";
 import Header from "@components/nav/Header.astro";
 import RealViewport from "@components/RealViewport.astro";
 
@@ -18,8 +19,9 @@ const { ogImage = "/default-opengraph.png", ...props } = Astro.props;
 <html lang="en">
     <Head {...props} ogImage={ogImage} />
     <body class="flex size-full flex-col font-sans text-base">
-        <main class="h-[calc(var(--vh,_1vh)_*_100)]">
+        <main class="flex h-[calc(var(--vh,_1vh)_*_100)] flex-col">
             <slot />
+            {Astro.url.pathname === "/" ? null : <Footer />}
         </main>
         <Header />
         <RealViewport />
