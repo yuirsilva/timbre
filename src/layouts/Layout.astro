@@ -19,7 +19,7 @@ const { ogImage = "/default-opengraph.png", ...props } = Astro.props;
 <html lang="en">
     <Head {...props} ogImage={ogImage} />
     <body class="flex size-full flex-col font-sans text-base">
-        <main class="flex h-[calc(var(--vh,_1vh)_*_100)] flex-col">
+        <main class="flex h-[calc(var(--vh,_1vh)_*_100)] flex-col gap-6">
             <slot />
             {Astro.url.pathname === "/" ? null : <Footer />}
         </main>
