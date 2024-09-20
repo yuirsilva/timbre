@@ -29,3 +29,8 @@ export function downloadResource(url: string, filename: string) {
         })
         .catch((e) => console.error(e));
 }
+
+// https://utfs.io/f/<FILE_KEY>
+export function formatFile(key: string) {
+    return `https://utfs.io/f/${key}`;
+}

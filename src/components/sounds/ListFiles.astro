@@ -1,25 +1,9 @@
 ---
 import Button from "@components/nav/Button.astro";
-import { v2 as cloudinary } from "cloudinary";
+import { formatFile } from "@/lib/functions";
+import { utapi } from "@/server/uploadthing";
 
-cloudinary.config({
-    cloud_name: import.meta.env.ASTRO_PUBLIC_CLOUDINARY_CLOUD_NAME,
-    api_key: import.meta.env.ASTRO_PUBLIC_CLOUDINARY_API_KEY,
-    api_secret: import.meta.env.CLOUDINARY_API_SECRET,
-});
-
-interface CloudinaryResource {
-    is_audio: boolean;
-    display_name: string;
-    public_id: string;
-    secure_url: string;
-    bytes: number;
-}
-
-let { resources } = (await cloudinary.api.resources({
-    resource_type: "video",
-})) as { resources: CloudinaryResource[] };
-resources = resources.filter((item) => item.bytes !== 0);
+let files = await utapi.listFiles();
 ---
 
 <table class="w-full max-[440px]:w-96">
@@ -35,26 +19,26 @@ resources = resources.filter((item) => item.bytes !== 0);
     </thead>
     <tbody class="font-mono font-normal uppercase">
         {
-            resources.map((file) => (
+            files.files.map((file) => (
                 <tr class="group relative border-b border-brand-white-dark hover:bg-brand-white-dark/20">
                     <td class="py-2 pl-2">
                         <Button
                             variant="ghost"
                             class="file-button font-mono uppercase"
-                            data-url={file.secure_url}
-                            data-filename={file.public_id}
+                            data-url={formatFile(file.key)}
+                            data-filename={file.name}
                         >
                             [Play]
                         </Button>
                     </td>
                     <td class="py-2">
-                        <p class="w-fit bg-brand-black text-brand-real-white">
-                            {file.display_name}
+                        <p class="w-fit bg-brand-black lowercase text-brand-real-white">
+                            {file.name}
                         </p>
                     </td>
                     <td class="py-2">
                         <p
-                            id={`duration-${file.public_id}`}
+                            id={`duration-${file.name}`}
                             class="w-fit bg-brand-black text-brand-real-white"
                         >
                             0:00
@@ -63,8 +47,8 @@ resources = resources.filter((item) => item.bytes !== 0);
                     <td class="flex justify-end gap-2 py-2 pr-2 [&_button]:font-sans">
                         <Button
                             class="download-webm"
-                            data-url={file.secure_url}
-                            data-filename={file.display_name}
+                            data-url={formatFile(file.key)}
+                            data-filename={file.name}
                         >
                             webm
                         </Button>
@@ -79,7 +63,7 @@ resources = resources.filter((item) => item.bytes !== 0);
     import { Howl } from "howler";
     import { formatDuration, downloadResource } from "@/lib/functions";
 
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("astro:page-load", () => {
         const playButton =
             document.querySelectorAll<HTMLButtonElement>(".file-button");
         const sounds: { [key: string]: Howl } = {};
@@ -93,7 +77,7 @@ resources = resources.filter((item) => item.bytes !== 0);
             if (!url || !filename) return;
 
             button.addEventListener("click", () => {
-                downloadResource(url, `${filename}.webm`);
+                downloadResource(url, filename);
             });
         });
 
@@ -105,6 +89,8 @@ resources = resources.filter((item) => item.bytes !== 0);
             sounds[filename] = new Howl({
                 src: [url],
                 html5: true,
+                format: "webm",
+                preload: true,
                 onload: () => {
                     const durationElement = document.getElementById(
                         `duration-${filename}`
