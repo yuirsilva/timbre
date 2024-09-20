@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ::-webkit-scrollbar {
-    display: none;
-}
-body {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-} */
-
 @layer base {
     :root {
         /* DEFAULT theme */
@@ -67,5 +59,33 @@ body {
         -webkit-text-size-adjust: 100%;
         -moz-text-size-adjust: 100%;
         text-size-adjust: 100%;
+    }
+
+    /* SCROLLBAR */
+    /* Firefox */
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: theme("backgroundColor.brand.primary")
+            theme("backgroundColor.brand.white");
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: theme("backgroundColor.brand.white");
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: theme("backgroundColor.brand.primary");
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: theme("backgroundColor.brand.primary-dark");
     }
 }
