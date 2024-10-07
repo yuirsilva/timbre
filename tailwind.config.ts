@@ -6,7 +6,7 @@ const config = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Pretendard", ...defaultTheme.fontFamily.sans],
+                sans: ["Helvetica", ...defaultTheme.fontFamily.sans],
                 title: ["Reed"],
                 mono: ["PPSupplyMono", ...defaultTheme.fontFamily.mono],
             },

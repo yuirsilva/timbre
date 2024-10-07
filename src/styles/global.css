@@ -28,20 +28,12 @@
     }
 
     @font-face {
-        font-family: "Pretendard";
-        src: url(/fonts/Pretendard-Regular.woff2) format("woff2");
+        font-family: "Helvetica";
+        src: url(/fonts/HelveticaNowVar.woff2) format("woff2");
         font-weight: 400;
         font-style: normal;
         font-display: swap;
     }
-    @font-face {
-        font-family: "Pretendard";
-        src: url(/fonts/Pretendard-Medium.woff2) format("woff2");
-        font-weight: 500;
-        font-style: normal;
-        font-display: swap;
-    }
-
     @font-face {
         font-family: "PPSupplyMono";
         src: url(/fonts/PPSupplyMono-Regular.woff2) format("woff2");

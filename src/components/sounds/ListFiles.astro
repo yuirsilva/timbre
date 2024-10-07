@@ -40,25 +40,25 @@ mutFiles.files.sort((a, b) => a.name.localeCompare(b.name));
                         </Button>
                     </td>
                     <td class="py-2">
-                        <p class="w-fit bg-brand-black lowercase text-brand-real-white">
+                        <p class="w-fit bg-brand-black px-1 pt-[3px] text-brand-real-white">
                             {file.name}
                         </p>
                     </td>
                     <td class="py-2">
                         <p
                             id={`duration-${file.name}`}
-                            class="w-fit bg-brand-black text-brand-real-white"
+                            class="w-fit bg-brand-black px-1 pt-[3px] text-brand-real-white"
                         >
                             0:00
                         </p>
                     </td>
-                    <td class="flex justify-end gap-2 py-2 pr-2 [&_button]:font-sans">
+                    <td class="flex justify-end gap-2 py-2 pr-2">
                         <Button
-                            class="download-webm"
+                            class="download-webm rounded-none pb-0.5 font-mono uppercase"
                             data-url={formatFile(file.key)}
                             data-filename={file.name}
                         >
-                            webm
+                            [webm]
                         </Button>
                     </td>
                 </tr>
