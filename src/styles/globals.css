@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "he";
+    src:
+        url("/fonts/he.woff2") format("woff2 supports variations"),
+        url("/fonts/he.woff2") format("woff2-variations");
+    font-weight: 400 500 700;
+    font-display: swap;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+:root {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color-scheme: light;
+}
+
+[data-barba="container"] {
+    position: absolute;
+    inset: 0;
+}
+
+@theme {
+    --font-sans: "he", sans-serif;
+
+    --ease-o6: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-io6: cubic-bezier(0.87, 0, 0.13, 1);
+
+    --animate-timbre: timbre 1s infinite;
+    --animate-spinner-fade-out: 1s linear 0s infinite normal none running
+        spinner-fade-out;
+
+    @keyframes spinner-fade-out {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes timbre {
+        0% {
+            transform: translate3d(0, 0%, 0);
+        }
+        100% {
+            transform: translate3d(0, -100%, 0) scale(1.2, 1.5);
+        }
+    }
+}
+
+@layer base {
+    body {
+        @apply bg-neutral-950 text-white;
+    }
+
+    [data-split-lines] span {
+        will-change: transform;
+        display: inline-block;
+    }
+}

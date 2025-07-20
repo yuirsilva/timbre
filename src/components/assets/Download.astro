@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"svg"> {}
+
+const { ...props } = Astro.props;
+---
+
+<svg
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    {...props}
+    ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline
+        class="download-sub"
+        points="7 10 12 15 17 10"></polyline>
+    <line class="download-sub" x1="12" x2="12" y1="15" y2="3"> </line>
+</svg>

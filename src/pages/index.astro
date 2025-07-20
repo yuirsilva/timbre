@@ -1,27 +1,95 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import Link from "@components/nav/Link.astro";
+
+import Music from "@components/Music.astro";
+import Background from "@components/background/index.astro";
 ---
 
-<Layout
-    title="Timbre — A collection of sounds for your website."
-    description="Collection of sounds made specifically for web experiences."
->
-    <section class="flex size-full flex-col items-center justify-center px-5">
-        <div class="text-center">
-            <h1
-                class="max-w-[calc(var(--vh,_1vh)_*_90)] font-title text-[calc(var(--vh,_1vh)_*_10)] leading-[90%] md:text-[calc(var(--vh,_1vh)_*_14)]"
-            >
-                A collection of sounds for your website.
-            </h1>
-            <p class="mt-4 text-brand-primary-dark">
-                A collection of sounds made specifically for web experiences.
-            </p>
-        </div>
-        <Link href="/sounds" class="mt-8">Check our catalog</Link>
-    </section>
-</Layout>
+<Layout namespace="Home">
+    <section
+        class="home-section relative flex flex-1 items-center justify-center lg:gap-10 lg:p-20"
+    >
+        <Background />
 
-<script>
-    console.log("yuri silva @yidxte (X_twitter)");
-</script>
+        <header
+            class="absolute top-0 left-0 flex w-full items-center justify-center px-10 pt-10 lg:px-20 lg:pt-20"
+        >
+            <nav
+                class="relative flex w-full items-center justify-center overflow-hidden"
+            >
+                <p
+                    aria-label="Timbre"
+                    class="w-40 text-center text-4xl tracking-tight uppercase will-change-transform select-none"
+                >
+                    <span
+                        class="pointer-events-none flex flex-col select-none [&_div]:leading-[20px]"
+                    >
+                        {
+                            [...Array(3)].map((_, i) => (
+                                <span class="h-5 w-full overflow-hidden">
+                                    <span
+                                        class="animate-timbre relative inline-block"
+                                        style={`animation-delay: ${i * 100}ms; bottom: ${i * 20 - 40}px;`}
+                                    >
+                                        timbre
+                                    </span>
+                                </span>
+                            ))
+                        }
+                    </span>
+                </p>
+                <a
+                    href="https://x.com/yidxte"
+                    target="_blank"
+                    class="home-nav-credits absolute top-1/2 right-0 hidden min-w-max -translate-y-1/2 will-change-transform hover:underline lg:block"
+                    >x (yidxte)</a
+                >
+            </nav>
+        </header>
+        <div class="relative px-8 lg:px-0">
+            <h1
+                data-split-lines
+                class="text-center text-[8vw] leading-[85%] font-medium tracking-tight"
+            >
+                The sound library that makes your web projects stand out.
+            </h1>
+            <a
+                href="/catalog"
+                class="home-check-button ease-io6 absolute -bottom-6 left-1/2 inline-flex h-fit min-w-max -translate-x-1/2 translate-y-full items-center gap-4 overflow-hidden rounded-md bg-white px-4 py-3 text-base leading-none font-medium text-black uppercase transition-transform duration-500 will-change-transform hover:scale-90 lg:-bottom-20 lg:px-8 lg:py-6 lg:text-xl"
+            >
+                <div
+                    class="aspect-square h-6 flex-1 overflow-hidden rounded-full bg-black p-1 lg:h-[1.8125rem]"
+                >
+                    <svg
+                        viewBox="0 -15 50 20"
+                        class="home-check-button-svg flex size-full items-center"
+                    >
+                        <g>
+                            <polyline
+                                stroke="white"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="home-check-button-line stroke-[5]"
+                            ></polyline>
+                        </g>
+                    </svg>
+                </div>
+                Check the catalog
+            </a>
+        </div>
+        <footer class="absolute bottom-0 left-0 w-full px-10 pb-10 lg:hidden">
+            <nav class="flex w-full overflow-hidden sm:justify-center">
+                <a
+                    href="https://x.com/yidxte"
+                    target="_blank"
+                    class="home-nav-credits min-w-max will-change-transform"
+                    >x (yidxte)</a
+                >
+            </nav>
+        </footer>
+
+        <Music />
+    </section>
+    <script src="../lib/howler.ts"></script>
+</Layout>

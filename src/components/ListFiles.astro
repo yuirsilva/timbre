@@ -1,0 +1,65 @@
+---
+import { utapi } from "@/server/uploadthing";
+import { generateHsl } from "@/lib/generate-hsl";
+
+import { formatFile } from "@/lib/uploadthing";
+
+import Player from "@/components/Player.astro";
+
+export interface Sound {
+    name: string;
+    url: string;
+    category: string;
+}
+
+interface Category {
+    name: string;
+    color: string;
+    catalog: Sound[];
+}
+
+let files = await utapi.listFiles();
+
+const list: Category[] = [];
+
+files.files.forEach((file) => {
+    const { name } = file;
+    const category = name.split("_")[0];
+
+    const cat = list.find((cat) => cat.name === category);
+    if (!cat) {
+        const cat: Category = {
+            name: category,
+            color: generateHsl({
+                saturation: [65, 65],
+                lightness: [70, 70],
+            }).css,
+            catalog: [{ category, name, url: formatFile(file.key) }],
+        };
+        list.push(cat);
+    } else {
+        cat.catalog.push({
+            category,
+            name,
+            url: formatFile(file.key),
+        });
+    }
+});
+---
+
+<section
+    class="catalog mx-auto flex w-full max-w-xl flex-col gap-6 px-6 will-change-transform"
+>
+    {
+        list.map((category) => (
+            <div class="flex flex-col gap-3">
+                <p class="ml-2 text-base/[1] font-medium text-black">
+                    {category.name}
+                </p>
+                {category.catalog.map((sound) => (
+                    <Player color={category.color} {...sound} />
+                ))}
+            </div>
+        ))
+    }
+</section>

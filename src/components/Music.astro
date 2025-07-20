@@ -1,0 +1,84 @@
+---
+import Play from "@/components/assets/Play.astro";
+---
+
+<button
+    class="home-player-button ease-io6 absolute right-10 bottom-10 flex size-14 items-center justify-center rounded-md bg-white transition-transform duration-500 will-change-transform hover:scale-90 hover:cursor-pointer lg:right-20 lg:bottom-20"
+>
+    <Play
+        class="home-player-button-play-svg absolute ml-0.5 aspect-square h-6 text-black"
+    />
+    <div
+        class="aspect-square h-6 overflow-hidden rounded-full p-1 lg:h-[1.8125rem]"
+    >
+        <svg
+            viewBox="0 -15 50 20"
+            class="home-player-button-svg flex size-full items-center"
+        >
+            <g>
+                <polyline
+                    stroke="black"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="home-player-button-line stroke-[5]"></polyline>
+            </g>
+        </svg>
+    </div>
+</button>
+
+<script>
+    import { gsap } from "@/lib/gsap";
+    import { sine } from "@/lib/sine-wave";
+
+    import { FADE_DURATION, sound, VOLUME } from "@/lib/howler";
+
+    sine(
+        ".home-player-button-svg",
+        ".home-player-button-line",
+        50,
+        15,
+        2.5,
+        40
+    );
+
+    if (!sound.playing()) {
+        gsap.to(".home-player-button-svg", {
+            scale: 0,
+        });
+        gsap.to(".home-player-button-play-svg", {
+            scale: 1,
+        });
+    }
+
+    const button = document.querySelector<HTMLButtonElement>(
+        ".home-player-button"
+    );
+
+    button?.addEventListener("click", () => {
+        if (sound.playing()) {
+            gsap.to(".home-player-button-svg", {
+                scale: 0,
+            });
+            gsap.to(".home-player-button-play-svg", {
+                scale: 1,
+            });
+
+            sound.fade(sound.volume(), 0, FADE_DURATION);
+
+            setTimeout(() => {
+                sound.pause();
+            }, FADE_DURATION);
+        } else {
+            sound.play();
+            sound.fade(0, VOLUME, FADE_DURATION);
+
+            gsap.to(".home-player-button-svg", {
+                scale: 1,
+            });
+            gsap.to(".home-player-button-play-svg", {
+                scale: 0,
+            });
+        }
+    });
+</script>

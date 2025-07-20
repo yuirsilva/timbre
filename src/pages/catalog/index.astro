@@ -1,0 +1,47 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Note from "@components/assets/Note.astro";
+import ListFiles from "@components/ListFiles.astro";
+---
+
+<Layout namespace="Catalog">
+    <div
+        class="catalog-background pointer-events-none fixed inset-0 -z-10 bg-white select-none"
+    >
+    </div>
+    <section
+        class="catalog-section flex flex-col justify-center gap-12 text-black"
+    >
+        <header
+            class="catalog-header flex w-full flex-col items-center gap-4 px-6 pt-32"
+        >
+            <div
+                class="catalog-note size-fit cursor-pointer rounded-xl border-2 border-blue-300 bg-linear-to-b from-blue-500 to-blue-600 p-2 transition-transform hover:-translate-y-2"
+                style="box-shadow: 0px -2px 0px 0px var(--color-blue-300) inset;"
+            >
+                <Note class="size-10 text-white" />
+            </div>
+            <div class="space-y-2 text-center font-medium">
+                <div class="overflow-hidden">
+                    <h1
+                        class="catalog-heading text-3xl tracking-tight will-change-transform lg:text-[4rem]/[1]"
+                    >
+                        Our catalog
+                    </h1>
+                </div>
+                <div class="overflow-hidden">
+                    <p class="catalog-description will-change-transform">
+                        Sounds from different categories.
+                    </p>
+                </div>
+            </div>
+        </header>
+        <ListFiles />
+
+        <a
+            href="mailto:yuxipersonal@gmail.com"
+            class="request-link fixed bottom-20 left-1/2 -translate-x-1/2 rounded-full bg-blue-500 px-3 py-2 text-base/[1] font-medium text-white transition-[scale] will-change-[scale] hover:scale-110"
+            >Request</a
+        >
+    </section>
+</Layout>

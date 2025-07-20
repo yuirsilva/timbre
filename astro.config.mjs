@@ -1,18 +1,11 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-
-import tailwind from "@astrojs/tailwind";
-
-import vercel from "@astrojs/vercel/serverless";
+import tailwindcss from "@tailwindcss/vite";
+import glsl from "vite-plugin-glsl";
 
 // https://astro.build/config
 export default defineConfig({
-    integrations: [tailwind()],
-    output: "server",
-    adapter: vercel(),
-    vite: {
-        ssr: {
-            noExternal: ["howler"],
-        },
-    },
+  vite: {
+    plugins: [tailwindcss(), glsl()],
+  },
 });

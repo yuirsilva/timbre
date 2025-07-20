@@ -1,0 +1,62 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import Play from "@/components/assets/Play.astro";
+import Pause from "@/components/assets/Pause.astro";
+import Spinner from "@/components/assets/Spinner.astro";
+import Download from "@/components/assets/Download.astro";
+
+import type { Sound } from "@/components/ListFiles.astro";
+
+interface Props extends Sound, HTMLAttributes<"div"> {
+    color: string;
+}
+
+const { color, category, name, url, ...props } = Astro.props;
+---
+
+<div
+    class="flex w-full justify-between gap-4 rounded-xl bg-[#f6f6f6] p-2 transition-colors"
+    {...props}
+>
+    <div class="flex min-w-0 items-center gap-2">
+        <div
+            class="h-11 w-4 rounded-sm lg:size-11"
+            style={`background-color: ${color}`}
+        >
+        </div>
+
+        <div
+            class="flex min-w-0 flex-col gap-0.5 *:overflow-hidden *:text-ellipsis *:whitespace-nowrap"
+        >
+            <p class="text-base/[1] font-medium">{name}</p>
+            <p class="text-sm/[1] text-neutral-500">{category}</p>
+        </div>
+    </div>
+
+    <div
+        class="flex gap-1 *:cursor-pointer *:rounded-sm *:border *:border-[#d4d4d4] *:bg-white *:transition-[border,_box-shadow] *:hover:border-neutral-500 *:hover:[box-shadow:_0px_-1px_0px_0px_var(--color-neutral-500)_inset]!"
+    >
+        <button
+            data-bg={color}
+            data-url={url}
+            data-filename={name}
+            class="play-button relative flex w-[5.5rem] items-center justify-center"
+            style="box-shadow: 0px -1px 0px 0px #d4d4d4 inset;"
+            ><Play class="play-button-play size-6 text-neutral-700" /><Pause
+                class="play-button-pause absolute size-6 text-neutral-700 opacity-0"
+            /></button
+        >
+        <button
+            data-url={url}
+            data-filename={name}
+            class="download-button group flex w-[5.5rem] items-center justify-center"
+            style="box-shadow: 0px -1px 0px 0px #d4d4d4 inset;"
+        >
+            <Download
+                class="download-button-download size-6 text-neutral-700 [&_.download-sub]:transition-transform group-hover:[&_.download-sub]:translate-y-0.5"
+            />
+            <Spinner />
+        </button>
+    </div>
+</div>

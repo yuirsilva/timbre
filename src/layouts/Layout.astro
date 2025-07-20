@@ -1,29 +1,36 @@
 ---
-import "@/styles/global.css";
-
+import Reveal from "@components/Reveal.astro";
+import "../styles/globals.css";
 import Head from "@components/Head.astro";
-import Footer from "@components/nav/Footer.astro";
-import Header from "@components/nav/Header.astro";
-import RealViewport from "@components/RealViewport.astro";
+
+export type Namespace = "Home" | "Catalog";
 
 interface Props {
-    title: string;
-    description: string;
-    ogImage?: string;
+    namespace: Namespace;
 }
 
-const { ogImage = "/default-opengraph.png", ...props } = Astro.props;
+const { namespace } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
-    <Head {...props} ogImage={ogImage} />
-    <body class="flex size-full flex-col font-sans text-base">
-        <main class="flex h-[calc(var(--vh,_1vh)_*_100)] flex-col gap-6">
+    <Head
+        title="Timbre: ba dum tss"
+        description="The sound library that makes your web projects stand out."
+    />
+    <body data-barba="wrapper" class="flex min-h-dvh flex-col font-sans">
+        <Reveal />
+        <div
+            class="transition-layer fixed inset-0 -z-[8] hidden bg-black/50 opacity-0"
+        >
+        </div>
+        <main
+            data-barba="container"
+            data-barba-namespace={namespace}
+            class="relative flex size-full flex-1 flex-col"
+        >
             <slot />
-            {Astro.url.pathname === "/" ? null : <Footer />}
         </main>
-        <Header />
-        <RealViewport />
+        <script src="../lib/barba.ts"></script>
     </body>
 </html>
