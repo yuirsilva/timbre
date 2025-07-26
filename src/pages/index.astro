@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 
 import Music from "@components/Music.astro";
+import TimbreText from "@components/assets/TimbreText.astro";
 import Background from "@components/background/index.astro";
 ---
 
@@ -17,27 +18,7 @@ import Background from "@components/background/index.astro";
             <nav
                 class="relative flex w-full items-center justify-center overflow-hidden"
             >
-                <p
-                    aria-label="Timbre"
-                    class="w-40 text-center text-4xl tracking-tight uppercase will-change-transform select-none"
-                >
-                    <span
-                        class="pointer-events-none flex flex-col select-none [&_div]:leading-[20px]"
-                    >
-                        {
-                            [...Array(3)].map((_, i) => (
-                                <span class="h-5 w-full overflow-hidden">
-                                    <span
-                                        class="animate-timbre relative inline-block"
-                                        style={`animation-delay: ${i * 100}ms; bottom: ${i * 20 - 40}px;`}
-                                    >
-                                        timbre
-                                    </span>
-                                </span>
-                            ))
-                        }
-                    </span>
-                </p>
+                <TimbreText aria-label="Timbre logo" class="w-28" />
                 <a
                     href="https://x.com/yidxte"
                     target="_blank"
@@ -49,16 +30,16 @@ import Background from "@components/background/index.astro";
         <div class="relative px-8 lg:px-0">
             <h1
                 data-split-lines
-                class="text-center text-[8vw] leading-[85%] font-medium tracking-tight"
+                class="max-w-[17ch] text-center text-[clamp(2.25rem,_4vw,_4rem)] leading-[85%] font-medium tracking-tight"
             >
                 The sound library that makes your web projects stand out.
             </h1>
             <a
                 href="/catalog"
-                class="home-check-button ease-io6 absolute -bottom-6 left-1/2 inline-flex h-fit min-w-max -translate-x-1/2 translate-y-full items-center gap-4 overflow-hidden rounded-md bg-white px-4 py-3 text-base leading-none font-medium text-black uppercase transition-transform duration-500 will-change-transform hover:scale-90 lg:-bottom-20 lg:px-8 lg:py-6 lg:text-xl"
+                class="home-check-button ease-io6 absolute -bottom-9 left-1/2 inline-flex h-fit min-w-max -translate-x-1/2 translate-y-full items-center gap-4 overflow-hidden rounded-xl bg-white px-4 py-3.5 text-base leading-none font-medium text-black uppercase transition-transform duration-500 will-change-transform hover:scale-90"
             >
                 <div
-                    class="aspect-square h-6 flex-1 overflow-hidden rounded-full bg-black p-1 lg:h-[1.8125rem]"
+                    class="aspect-square h-6 flex-1 overflow-hidden rounded-full bg-black p-1"
                 >
                     <svg
                         viewBox="0 -15 50 20"
