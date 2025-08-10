@@ -4,8 +4,6 @@ interface Props {
     description: string;
 }
 const { title, description } = Astro.props as Props;
-
-const permalink = Astro.url.href;
 ---
 
 <head>
@@ -20,18 +18,25 @@ const permalink = Astro.url.href;
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" /><!-- 180×180 -->
+    <link rel="canonical" href="https://timbre.yvri.vercel.app" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://timbre.yvri.vercel.app" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://timbre.yvri.vercel.app/default-opengraph.png" />
+    <meta property="og:image" content="https://timbre.yvri.vercel.app/default-opengraph.png?v=3" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://timbre.yvri.vercel.app" />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content="https://timbre.yvri.vercel.app/default-opengraph.png" />
+    <meta property="twitter:image" content="https://timbre.yvri.vercel.app/default-opengraph.png?v=3" />
+    <meta name="twitter:site" content="@yidxte" />
+    <meta name="twitter:creator" content="@yidxte" />
+
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Yuri Silva" />
 </head>
