@@ -22,6 +22,8 @@ let files = await utapi.listFiles();
 
 const list: Category[] = [];
 
+const getN = (s: string) => parseInt(s.match(/_(\d+)/)?.[1] ?? "-1", 10);
+
 files.files.forEach((file) => {
     const { name } = file;
     const category = name.split("_")[0];
@@ -45,6 +47,10 @@ files.files.forEach((file) => {
         });
     }
 });
+
+for (const cat of list) {
+    cat.catalog.sort((a, b) => getN(b.name) - getN(a.name)); // DESC
+}
 ---
 
 <section
